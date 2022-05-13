@@ -1,11 +1,7 @@
-# reactBookmark
+# react-boilerplate-with-webpack
 
-A bookmark app used to save interesting articles/website on the Internet.
+A clean react boiler plate for my react projects
 
 ## TECHS USED
 
-React
-
-## DEMO
-
-working in progress ...
+React, styled-component
