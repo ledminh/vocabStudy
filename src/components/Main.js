@@ -9,7 +9,7 @@ function Main() {
 
     return (
         <div>
-            {data.map(d => <p key={d}>{d}</p>)}
+            {console.log(data)}
         </div>
     )
 }

@@ -1,11 +1,13 @@
 import { createContext, useState } from "react";
 
+import getWordData from './getWordData';
+
 const DataContext = createContext();
 
 function useDataContext() {
     const [data, setData] = useState([]);
 
-    const addData = (d) => setData([d, ...data]);
+    const addData = (d) => setData([getWordData(d), ...data]);
 
     const Data = {data, addData};
 
