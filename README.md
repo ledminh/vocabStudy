@@ -1,6 +1,6 @@
-# react-boilerplate-with-webpack
+# VocabStudy
 
-A clean react boiler plate for my react projects
+An App to study English vocabulary
 
 ## TECHS USED
 
