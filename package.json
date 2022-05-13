@@ -1,7 +1,7 @@
 {
-  "name": "react-bookmark",
+  "name": "vocab-study",
   "version": "1.0.0",
-  "description": "An app to bookmark interesting websites",
+  "description": "An app to study English vocabulary",
   "main": "src",
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
