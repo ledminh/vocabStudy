@@ -10,8 +10,7 @@ function InputBar() {
         if(e.key == 'Enter') {
             addData(value);
             setValue("");
-            
-            console.log(e.target.focus());
+      
         }
     }
 
@@ -36,6 +35,9 @@ export default InputBar;
 
 const Wrapper = styled.div`
     width: 80%;
+    max-width: 1400px;
+    min-width: 300px;
+
     margin: auto;
     margin-top: 3rem;
 `;

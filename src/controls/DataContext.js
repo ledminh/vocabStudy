@@ -6,8 +6,13 @@ const DataContext = createContext();
 
 function useDataContext() {
     const [data, setData] = useState([]);
+    
 
-    const addData = (d) => setData([getWordData(d), ...data]);
+
+    const addData = (w) => {
+        getWordData(w)
+            .then((d) => setData([d, ...data]));
+    }
 
     const Data = {data, addData};
 
