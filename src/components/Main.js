@@ -10,8 +10,12 @@ function Main() {
 
     return (
         <Wrapper>
+            <WordBlock />
             {
-                data.map(wData  => <WordBlock key={wData.name} data={wData}/>) 
+                //data.map(wData  => <WordBlock key={wData.name} data={wData}/>) 
+            }
+            {
+                console.log(data)
             }
         </Wrapper>
     )

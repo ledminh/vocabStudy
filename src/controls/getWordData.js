@@ -29,7 +29,7 @@ const processDefinitionsJSON = (defsJSON)  => {
     const resultsArr = defsJSON.filter(defObj => defObj.fl)
                                 .map(defObj => ({
                                     type: defObj.fl,
-                                    def: defObj.shortdef
+                                    defs: defObj.shortdef
                                 }));
     
     const baseFilename = defsJSON[0].hwi.prs[0].sound.audio;
