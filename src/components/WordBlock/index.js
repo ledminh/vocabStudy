@@ -77,7 +77,7 @@ function WordBlock({data}) {
                         }
                     </UL>
                 </BlockWrapper>
-
+                
                 <BlockWrapper title="YOUR TURN">
                     <PracticeBlock word="hold"/>
                 </BlockWrapper>

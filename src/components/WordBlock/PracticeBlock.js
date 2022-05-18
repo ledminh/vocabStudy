@@ -19,28 +19,40 @@ function useText (word)  {
 
     return {
         text,
+        setText,
         occurences,
         onChangeHandle
     }
 }
 
 
+const onKeyUpHandle = (key, text, setText) => {
+    if(key == 'Enter') {
+        
+    }
+}
 
 
 function PracticeBlock({word}) {
     
-    const {text, occurences, onChangeHandle} = useText(word);
+    const {text, setText, occurences, onChangeHandle} = useText(word);
     
 
     return ( 
         <Wrapper>
-            <Description>Now that you learned enough about the word <Emphasize>{word}</Emphasize>, it&apos;s your turn to practice using it. Make one or two sentences or even a paragraph that has this word. Press ENTER when you are done.</Description>
+            <Description>Now that you learned enough about the word <Emphasize>{word}</Emphasize>, it&apos;s your turn to practice using it. Make one or two sentences or even a paragraph that has this word.</Description>
             <TextArea 
                 rows="10"
                 value = {text}
                 onChange = {onChangeHandle}
+                onKeyUp = {(e) => onKeyUpHandle(e.target.key, text, setText)}
                 />
             <Status>You used the word <Emphasize>{word}</Emphasize> {occurences} times so far.</Status>
+            <Result show={text.length != 0}>
+                <div>
+                    {text}
+                </div>
+            </Result>
         </Wrapper>
     )
       
@@ -75,4 +87,28 @@ const Status = styled.div`
 const Emphasize = styled.span`
     color: #69040e;
     font-size: 120%;
+`
+
+const Result = styled.div`
+    display: ${props => props.show? 'block' : 'none'};
+    background-color: #e3cacd;
+
+    padding: 0 0 1rem 1rem;
+    border-radius: 20px;
+
+    margin-top: 2rem;
+    &:before {
+        content: "PREVIEW";
+        display: inline-block;
+        margin: 0;
+
+        transform: translateY(-1.2rem);
+
+        background-color: #381417;
+        color: white;
+
+        padding: .6rem;
+
+        border-radius: 20px;
+    }
 `
