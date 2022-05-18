@@ -6,6 +6,7 @@ import Example from './Example';
 import PracticeBlock from './PracticeBlock';
 
 import getOtherResources  from '../../controls/getOtherResources';
+import { createSound } from '../../controls/SoundControl';
 
 const definitions = [
     {
@@ -39,6 +40,12 @@ const examples = [
     "I danced."
 ]
 
+const sayItButtonHandle = (soundLink) => {
+    const sound = createSound(soundLink, false, false, .7);
+
+    sound.play();
+}
+
 function WordBlock({data}) {
     return (
         <Wrapper>
@@ -48,7 +55,7 @@ function WordBlock({data}) {
                     {
                         definitions.map(defData => <Definition key={defData.defs[0]} data={defData} />)
                     }
-                    <SayItButton onClick={() => console.log(`https://www.myinstants.com/media/sounds/fortunati_sparta.mp3`) }><h5>SAY IT!</h5></SayItButton>
+                    <SayItButton onClick={() => sayItButtonHandle(`https://media.merriam-webster.com/audio/prons/en/us/mp3/t/teache01.mp3`) }><h5>SAY IT!</h5></SayItButton>
                 </BlockWrapper>
 
                 <BlockWrapper title="SYNONYMS">
