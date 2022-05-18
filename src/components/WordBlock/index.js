@@ -42,8 +42,8 @@ const examples = [
 
 const sayItButtonHandle = (soundLink) => {
     const sound = createSound(soundLink, false, false, .7);
-
     sound.play();
+
 }
 
 function WordBlock({data}) {
@@ -89,7 +89,9 @@ function WordBlock({data}) {
 
 export default WordBlock;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+
+`;
 
 
 
@@ -106,6 +108,8 @@ const Title = styled.div`
 const Body = styled.div`
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
+
 `
 
 const SayItButton = styled.button`

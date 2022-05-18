@@ -1,12 +1,46 @@
 import styled from "styled-components";
+import { useState } from 'react';
+import { countInstances } from "../../utils";
+
+
+function useText (word)  {
+    const [text, setText] = useState("");
+    const [occurences, setOccurences] = useState(0);
+
+    const onChangeHandle = (e) => {
+        const value = e.target.value;
+        setText(value);
+
+        const count = countInstances(value.toUpperCase(), word.toUpperCase());
+        setOccurences(count);
+
+        
+    }
+
+    return {
+        text,
+        occurences,
+        onChangeHandle
+    }
+}
+
+
+
 
 function PracticeBlock({word}) {
+    
+    const {text, occurences, onChangeHandle} = useText(word);
+    
 
-    return (
+    return ( 
         <Wrapper>
-            <Description>Now that you learned enough about the word {word}, it&apos;s your turn to practice using it. Make one or two sentences or even a paragraph that has this word. Press ENTER when you are done.</Description>
-            <TextArea rows="10"/>
-            <Status>You used the word {word} 10 times so far.</Status>
+            <Description>Now that you learned enough about the word <Emphasize>{word}</Emphasize>, it&apos;s your turn to practice using it. Make one or two sentences or even a paragraph that has this word. Press ENTER when you are done.</Description>
+            <TextArea 
+                rows="10"
+                value = {text}
+                onChange = {onChangeHandle}
+                />
+            <Status>You used the word <Emphasize>{word}</Emphasize> {occurences} times so far.</Status>
         </Wrapper>
     )
       
@@ -28,12 +62,17 @@ const Description = styled.div`
 const TextArea = styled.textarea`
     min-width: 100%;
     max-width: 100%;
-
-    max-height: 10line;
-
+    
+    font-size: 1.5rem;
+    font-family: cursive;
     margin-bottom: 1rem;
 `
 
 const Status = styled.div`
     font-family: monospace;
+`
+
+const Emphasize = styled.span`
+    color: #69040e;
+    font-size: 120%;
 `

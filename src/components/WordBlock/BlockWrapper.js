@@ -13,6 +13,8 @@ function BlockWrapper({title, children}) {
 }
 
 const Wrapper = styled.div`
+    display: grid;
+    grid-template-rows: 3rem auto;
     flex-basis: 100%;
     margin-top: 1rem;
     
@@ -22,6 +24,16 @@ const Wrapper = styled.div`
     overflow: hidden;    
 
     box-shadow: 0 0 3px black;
+
+    
+    
+    @media (min-width: 1170px) {
+        flex-basis: 48%;
+
+        &:last-child {
+            flex-basis: 100%;
+        }
+    }
 
 `
 export default BlockWrapper;
@@ -40,12 +52,12 @@ const Title = styled.div`
 
 
 const Body = styled.div`
+    
     border: 1px solid #2E5975;
     
     margin: 1rem;
     padding: 1rem;
     padding-bottom: 0;
-
 
 
     border-radius: 20px;

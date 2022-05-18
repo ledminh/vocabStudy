@@ -4,9 +4,9 @@ const Header = () => (
     <Wrapper>
             <div className="title"><h1>STUDY ENGLISH VOCABULARY</h1></div>
             <div className='sub-title'>
-                <p><h4>A simple app to study English vocabulary based on the author&apos;
-            s routine everyday.</h4></p> 
-                <p><h4>Type a word you want to study to the input bar below and press <span className='emphasize'>ENTER</span>.</h4></p>
+                <h4>A simple app to study English vocabulary based on the author&apos;
+            s routine everyday.</h4> 
+                <h4>Type a word you want to study to the input bar below and press <span className='emphasize'>ENTER</span>.</h4>
             </div>
     </Wrapper>
 )
