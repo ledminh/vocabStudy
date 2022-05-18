@@ -19,23 +19,42 @@ function useText (word)  {
 
     return {
         text,
-        setText,
         occurences,
         onChangeHandle
     }
 }
 
 
-const onKeyUpHandle = (key, text, setText) => {
-    if(key == 'Enter') {
-        
+function processTextForPreview(text) {
+    text = text.split('\n');
+
+    return text;
+}
+
+function highLightWord(text, word) {
+    const arr = [];
+    
+    let startI = 0,
+        i = text.toUpperCase().indexOf(word.toUpperCase(), startI);
+
+    while(i != - 1){
+        arr.push(text.substring(startI, i));
+        arr.push(text.substring(i, i + word.length));
+
+        startI = i + word.length;
+        i = text.toUpperCase().indexOf(word.toUpperCase(), startI);
     }
+
+    arr.push(text.substring(startI));
+
+
+    return arr;
 }
 
 
 function PracticeBlock({word}) {
     
-    const {text, setText, occurences, onChangeHandle} = useText(word);
+    const {text, occurences, onChangeHandle} = useText(word);
     
 
     return ( 
@@ -45,12 +64,23 @@ function PracticeBlock({word}) {
                 rows="10"
                 value = {text}
                 onChange = {onChangeHandle}
-                onKeyUp = {(e) => onKeyUpHandle(e.target.key, text, setText)}
+                
                 />
             <Status>You used the word <Emphasize>{word}</Emphasize> {occurences} times so far.</Status>
             <Result show={text.length != 0}>
                 <div>
-                    {text}
+                    {processTextForPreview(text).map(t => {
+                        
+                        return (
+                            <p key={t}>
+                                {highLightWord(t, word).map((fText, i) => {
+                                    
+                                    if(fText.toUpperCase() != word.toUpperCase()) return <span key={fText + i}>{fText}</span>
+                                    else return <Emphasize key={fText + i}>{fText}</Emphasize>
+                                })}
+                            </p>
+                            );
+                    })}
                 </div>
             </Result>
         </Wrapper>
@@ -110,5 +140,9 @@ const Result = styled.div`
         padding: .6rem;
 
         border-radius: 20px;
+    }
+
+    p {
+        margin-bottom: .5rem;
     }
 `

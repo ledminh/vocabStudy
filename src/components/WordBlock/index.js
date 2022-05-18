@@ -7,6 +7,7 @@ import PracticeBlock from './PracticeBlock';
 
 import getOtherResources  from '../../controls/getOtherResources';
 import { createSound } from '../../controls/SoundControl';
+import { useState } from 'react';
 
 const definitions = [
     {
@@ -40,13 +41,22 @@ const examples = [
     "I danced."
 ]
 
-const sayItButtonHandle = (soundLink) => {
+const sayItButtonHandle = (soundLink, setSayItActive, sayItActive) => {
+    if(sayItActive) return;
+
+
     const sound = createSound(soundLink, false, false, .7);
     sound.play();
+
+    setSayItActive(true);
+
+    setTimeout(() => setSayItActive(false), 1200);
 
 }
 
 function WordBlock({data}) {
+    const [sayItActive, setSayItActive] = useState(false);
+
     return (
         <Wrapper>
             <Title><h2>HOLD</h2></Title>
@@ -55,7 +65,14 @@ function WordBlock({data}) {
                     {
                         definitions.map(defData => <Definition key={defData.defs[0]} data={defData} />)
                     }
-                    <SayItButton onClick={() => sayItButtonHandle(`https://media.merriam-webster.com/audio/prons/en/us/mp3/t/teache01.mp3`) }><h5>SAY IT!</h5></SayItButton>
+                    
+                    <SayItButton 
+                        active={sayItActive}
+
+                        onClick={() => sayItButtonHandle(`https://media.merriam-webster.com/audio/prons/en/us/mp3/t/teache01.mp3`, setSayItActive, sayItActive) 
+                        }>
+                            <h5>SAY IT!</h5>
+                    </SayItButton>
                 </BlockWrapper>
 
                 <BlockWrapper title="SYNONYMS">
@@ -121,11 +138,28 @@ const SayItButton = styled.button`
     
     padding: 1rem;
     
+    border-radius: 20px;
 
+
+    
+
+    ${props => props.active? `
+        cursor: not-allowed;
+        background-color: gray;
+        border: none;
+
+
+        &:hover {            
+            border: none;
+        }
+    
+        &:active {
+            border: none;
+        }
+    `: `
     background-color: #855303;
     color: #e6e6e6;
     
-    border-radius: 20px;
     border: 3px solid #855303;
 
     &:hover {
@@ -137,6 +171,8 @@ const SayItButton = styled.button`
         color: #e3e3e3;
         border: 3px solid #e3e3e3;
     }
+    
+    `}
 
 `
 
