@@ -3,6 +3,9 @@ import BlockWrapper from './BlockWrapper';
 import Definition from './Definition';
 import Synonym from './Synonym';
 import Example from './Example';
+import PracticeBlock from './PracticeBlock';
+
+import getOtherResources  from '../../controls/getOtherResources';
 
 const definitions = [
     {
@@ -61,7 +64,15 @@ function WordBlock({data}) {
                 </BlockWrapper>
                 
                 <BlockWrapper title="OTHER RESOURCES">
+                    <UL>
+                        {
+                            getOtherResources("hold").map(wD => <LI key={wD.title}><a href={wD.link}>{wD.title}</a></LI>)
+                        }
+                    </UL>
+                </BlockWrapper>
 
+                <BlockWrapper title="YOUR TURN">
+                    <PracticeBlock word="hold"/>
                 </BlockWrapper>
             </Body>
         
@@ -115,5 +126,13 @@ const SayItButton = styled.button`
         color: #e3e3e3;
         border: 3px solid #e3e3e3;
     }
+
+`
+
+const UL = styled.ul`
+    list-style-type: none;
+`;
+
+const LI = styled.li`
 
 `

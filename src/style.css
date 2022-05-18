@@ -29,3 +29,20 @@ h5 {
     font-size: 1.7rem;
 }
 
+a,
+a:visited {
+    display: inline-block;
+    color: #52022f;
+    text-decoration: none;
+    margin-bottom: .5rem;
+
+    border-bottom: 4px solid white;
+
+    transition: border-bottom .2s, color .2s;
+}
+
+a:hover {
+    color: #0f0009;
+    border-bottom: 4px solid #0f0009;
+
+}
