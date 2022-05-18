@@ -48,7 +48,6 @@ const Input = styled.input`
     border: 3px solid #6D8BA6;
 
     padding: 1rem;
-    font-size: 1.5rem;
 
     text-align: center;
 

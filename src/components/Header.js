@@ -31,13 +31,12 @@ const Wrapper = styled.header`
 
         margin-bottom: 1.5rem;
 
-        font-size: 4rem;
     }
 
     .sub-title {
         color: rgb(179, 179, 179);
 
-        font-size: 2rem;
+
 
         .emphasize {
             color: #d9734e;

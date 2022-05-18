@@ -33,8 +33,7 @@ const Title = styled.div`
 
     text-align: center;
 
-    font-size: 1.5rem;
-    font-weight: bold;
+
 
     padding: .5rem;
 `

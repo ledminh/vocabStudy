@@ -9,7 +9,6 @@ export default Synonym;
 
 const Wrapper = styled.span`
     display: inline-block;
-    font-size: 1.5rem;
     margin: .3rem;
     
     padding: .5rem;

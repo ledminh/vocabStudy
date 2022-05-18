@@ -71,13 +71,14 @@ function WordBlock({data}) {
 
 export default WordBlock;
 
-const Wrapper = styled.div``
+const Wrapper = styled.div``;
+
+
 
 const Title = styled.div`
     text-align: center;
-    font-size: 1.5rem;
+    
     color: #465873;
-
     width: 50%;
     margin: auto;
     margin-bottom: 1rem;
@@ -98,8 +99,6 @@ const SayItButton = styled.button`
     
     padding: 1rem;
     
-    font-size: 1.5rem;
-    font-weight: bold;
 
     background-color: #855303;
     color: #e6e6e6;

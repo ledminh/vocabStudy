@@ -20,8 +20,7 @@ const Definition = ({data}) => {
 export default Definition;
 
 const Type = styled.div`
-    font-size: 1.5rem;
-    font-weight: bold;
+
 `
 
 const Ul = styled.ul`
