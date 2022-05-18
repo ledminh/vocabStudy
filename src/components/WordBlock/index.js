@@ -45,7 +45,7 @@ function WordBlock({data}) {
                     {
                         definitions.map(defData => <Definition key={defData.defs[0]} data={defData} />)
                     }
-                    <SayItButton onClick={() => console.log(`https://www.myinstants.com/media/sounds/fortunati_sparta.mp3`) }>SAY IT!</SayItButton>
+                    <SayItButton onClick={() => console.log(`https://www.myinstants.com/media/sounds/fortunati_sparta.mp3`) }><h5>SAY IT!</h5></SayItButton>
                 </BlockWrapper>
 
                 <BlockWrapper title="SYNONYMS">

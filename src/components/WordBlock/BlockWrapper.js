@@ -6,7 +6,7 @@ function BlockWrapper({title, children}) {
 
     return (
         <Wrapper>
-            <Title>{title}</Title>
+            <Title><h4>{title}</h4></Title>
             <Body>{children}</Body>
         </Wrapper>
     )

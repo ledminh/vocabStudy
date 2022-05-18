@@ -6,7 +6,7 @@ const Definition = ({data}) => {
 
     return (
         <>
-            <Type>{type.toUpperCase()}:</Type>
+            <Type><h5>{type.toUpperCase()}:</h5></Type>
             <Ul>
                 {
                     defs.map((def) => <Li key={def}>{def}</Li>)

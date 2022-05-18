@@ -51,6 +51,8 @@ const Input = styled.input`
 
     text-align: center;
 
+    font-size: 1.5rem;
+
     :focus {
         box-shadow: 0 0 30px black, 0 0 10px inset white;
         background-color: #d6d6d6;

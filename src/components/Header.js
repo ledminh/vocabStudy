@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const Header = () => (
     <Wrapper>
-            <h1>STUDY ENGLISH VOCABULARY</h1>
+            <div className="title"><h1>STUDY ENGLISH VOCABULARY</h1></div>
             <div className='sub-title'>
-                <p>A simple app to study English vocabulary based on the author&apos;
-            s routine everyday.</p> 
-                <p>Type a word you want to study to the input bar below and press <span className='emphasize'>ENTER</span>.</p>
+                <p><h4>A simple app to study English vocabulary based on the author&apos;
+            s routine everyday.</h4></p> 
+                <p><h4>Type a word you want to study to the input bar below and press <span className='emphasize'>ENTER</span>.</h4></p>
             </div>
     </Wrapper>
 )
@@ -20,7 +20,7 @@ const Wrapper = styled.header`
 
     text-align: center;
 
-    h1 {
+    .title {
         border-bottom: 4px solid white;
         width: 80%;
         margin: auto;
