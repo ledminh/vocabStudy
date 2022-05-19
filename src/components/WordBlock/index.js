@@ -9,37 +9,37 @@ import getOtherResources  from '../../controls/getOtherResources';
 import { createSound } from '../../controls/SoundControl';
 import { useState } from 'react';
 
-const definitions = [
-    {
-        type: "adjective",
-        defs: ["Adj definition 1", "Adj definition 2", "Adj definition 3"]
-    },
+// const definitions = [
+//     {
+//         type: "adjective",
+//         defs: ["Adj definition 1", "Adj definition 2", "Adj definition 3"]
+//     },
 
-    {
-        type: "noun",
-        defs: ["Noun definition 1", "Noun definition 2", "Noun definition 3"]
-    },
+//     {
+//         type: "noun",
+//         defs: ["Noun definition 1", "Noun definition 2", "Noun definition 3"]
+//     },
 
-    {
-        type: "verb",
-        defs: ["Verb definition 1", "Verb definition 2", "Verb definition 3"]
-    }
-]
+//     {
+//         type: "verb",
+//         defs: ["Verb definition 1", "Verb definition 2", "Verb definition 3"]
+//     }
+// ]
 
-const synonyms = [
-    'synonyms', 'keep', 'hello'
-]
+// const synonyms = [
+//     'synonyms', 'keep', 'hello'
+// ]
 
-const examples = [
-    "The cat stretched.",
-    "Jacob stood on his tiptoes.",
-    "The car turned the corner.",
-    "Kelly twirled in circles.",
-    "She opened the door.",
-    "Aaron made a picture.",
-    "I'm sorry.",
-    "I danced."
-]
+// const examples = [
+//     "The cat stretched.",
+//     "Jacob stood on his tiptoes.",
+//     "The car turned the corner.",
+//     "Kelly twirled in circles.",
+//     "She opened the door.",
+//     "Aaron made a picture.",
+//     "I'm sorry.",
+//     "I danced."
+// ]
 
 const sayItButtonHandle = (soundLink, setSayItActive, sayItActive) => {
     if(sayItActive) return;
@@ -55,13 +55,16 @@ const sayItButtonHandle = (soundLink, setSayItActive, sayItActive) => {
 }
 
 function WordBlock({data}) {
+    const {name, definitions, synonyms, examples, audioLink} = data;
+
     const [sayItActive, setSayItActive] = useState(false);
+
 
     return (
         <Wrapper>
-            <Title><h2>HOLD</h2></Title>
+            <Title><h2>{name.toUpperCase()}</h2></Title>
             <Body>
-                <BlockWrapper title="DEFINITIONS">
+                <BlockWrapper title="DEFINITIONS" key="def">
                     {
                         definitions.map(defData => <Definition key={defData.defs[0]} data={defData} />)
                     }
@@ -69,34 +72,38 @@ function WordBlock({data}) {
                     <SayItButton 
                         active={sayItActive}
 
-                        onClick={() => sayItButtonHandle(`https://media.merriam-webster.com/audio/prons/en/us/mp3/t/teache01.mp3`, setSayItActive, sayItActive) 
+                        onClick={() => sayItButtonHandle(audioLink, setSayItActive, sayItActive) 
                         }>
                             <h5>SAY IT!</h5>
                     </SayItButton>
                 </BlockWrapper>
 
-                <BlockWrapper title="SYNONYMS">
+                <BlockWrapper title="SYNONYMS" key="syns">
                     {
-                        synonyms.map(syn => <Synonym key={syn} syn={syn} />)
+                        synonyms.length != 0?
+                            synonyms.map(syn => <Synonym key={syn} syn={syn} />):
+                            <NoData>There is no synonym available</NoData>
                     }                
                 </BlockWrapper>
                 
-                <BlockWrapper title="EXAMPLES">
+                <BlockWrapper title="EXAMPLES" key="exs">
                     {
-                        examples.map((ex, index) => <Example key={ex} text={ex} index={index}/>)
+                        examples.length != 0? 
+                            examples.map((ex, index) => <Example key={ex} text={ex} index={index}/>):
+                            <NoData>There is no example available</NoData>
                     }
                 </BlockWrapper>
                 
-                <BlockWrapper title="OTHER RESOURCES">
+                <BlockWrapper title="OTHER RESOURCES" key="otherresource">
                     <UL>
                         {
-                            getOtherResources("hold").map(wD => <LI key={wD.title}><a href={wD.link}>{wD.title}</a></LI>)
+                            getOtherResources(name).map(wD => <LI key={wD.title}><a href={wD.link}>{wD.title}</a></LI>)
                         }
                     </UL>
                 </BlockWrapper>
                 
-                <BlockWrapper title="YOUR TURN">
-                    <PracticeBlock word="hold"/>
+                <BlockWrapper title="YOUR TURN" key="yourturn">
+                    <PracticeBlock word={name}/>
                 </BlockWrapper>
             </Body>
         
@@ -182,4 +189,10 @@ const UL = styled.ul`
 
 const LI = styled.li`
 
+`
+const NoData = styled.div`
+    color: gray;
+    text-align: center;
+
+    font-weight: bold;
 `

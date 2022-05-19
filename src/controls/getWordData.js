@@ -113,7 +113,6 @@ async function getWordData(word) {
 
     const synonyms = processThesaurusJSON(thesaurusJSON);
 
-    
 
     return {
         name: word,
