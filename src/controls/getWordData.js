@@ -96,6 +96,12 @@ function processThesaurusJSON(thesaurusJSON) {
     result = [].concat.apply([], result);
     result = [].concat.apply([], result);
 
+    result = result.reduce((arr, elem) => {
+        if(!arr.includes(elem))
+            arr.push(elem);
+
+        return arr;
+    }, [])
     return result;
 }
 

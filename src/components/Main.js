@@ -9,13 +9,13 @@ function Main() {
     const {data} = useContext(DataContext);    
 
     return (
-        <Wrapper>
-            
-            {
-                data.map(wData  => <WordBlock key={wData.name} data={wData}/>) 
-            }
-           
-        </Wrapper>
+        data.length != 0 ?
+            (<Wrapper>
+                {
+                    data.map(wData  => <WordBlock key={wData.name} data={wData}/>) 
+                }
+            </Wrapper>):
+            null
     )
 }
 
