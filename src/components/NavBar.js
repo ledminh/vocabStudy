@@ -1,19 +1,18 @@
 import styled from "styled-components";
 
-function NavBar({numWords, currentIndex, setIndex}) {
+function NavBar({wordsArr, currentIndex, setIndex}) {
 
     return (
-        numWords > 1 ?
+        wordsArr.length > 1 ?
         (<Wrapper>
             {
-                Array.from({length: numWords}, (_, i) => i + 1)
-                        .map((num, index) => <Button 
-                                        key={num}
-                                        current={index == currentIndex}
-                                        onClick={() => setIndex(index)}
-                                        >
-                                            {num}
-                                        </Button>)
+                wordsArr.map((name, index) => <Button 
+                                                key={name}
+                                                current={index == currentIndex}
+                                                onClick={() => setIndex(index)}
+                                                >
+                                                    {name.toUpperCase()}
+                                                </Button>)
             }
         </Wrapper>) :
         null
@@ -28,9 +27,9 @@ const Wrapper = styled.div`
 `
 
 const Button = styled.button`
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.5rem;
+    padding: .6rem;
+
+    font-size: 1rem;
 
     margin-left: .5rem;
     margin-top: .5rem;
@@ -41,6 +40,8 @@ const Button = styled.button`
 
     background-color: #0b0c24;
     color: white;
+
+    
 
     transition: background-color .4s, color .4s, border .4s;
 
@@ -59,5 +60,7 @@ const Button = styled.button`
         border: 6px solid #dec6bf;
         background-color: #dec6bf;
         color: black;
+        box-shadow: 0 0 12px black,  0 0 5px white inset;
+        
     `: ``}
 `

@@ -15,7 +15,7 @@ function Main() {
     return (
         data.length != 0 ?
             (<Wrapper>
-                <NavBar numWords={data.length} 
+                <NavBar wordsArr={data.map(d => d.name)} 
                         currentIndex={index} 
                         setIndex={setIndex}
                         />

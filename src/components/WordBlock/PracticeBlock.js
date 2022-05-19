@@ -77,6 +77,7 @@ function PracticeBlock({word, practiceText}) {
         const count = countWordOccurences(wordRef.current.practiceText.text, word);
         setOccurences(count);
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [word]);
 
     return ( 
