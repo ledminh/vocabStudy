@@ -1,4 +1,5 @@
 import { DICTIONARY_KEY, THESAURUS_KEY } from "../APIKEY";
+import {uniqWith, isEqual} from 'lodash';
 
 const getWordRequest = (word) => `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${DICTIONARY_KEY}`;
 
@@ -26,18 +27,20 @@ const getAudio = (first3Chars, baseFilename) => `https://media.merriam-webster.c
 
 
 const processDefinitionsJSON = (defsJSON)  => {
-    const resultsArr = defsJSON.filter(defObj => defObj.fl)
+    const resultsArr =  uniqWith(defsJSON.filter(defObj => defObj.fl)
                                 .map(defObj => ({
                                     type: defObj.fl,
                                     defs: defObj.shortdef
-                                }));
+                                })), isEqual)
+                                .map(defsObj => ({id:  Math.floor(Math.random() * Date.now()), ...defsObj}));
+    
     
     const baseFilename = defsJSON[0].hwi.prs[0].sound.audio;
     const first3Char = baseFilename.substring(0,3);
 
     const audioLink = getAudio(first3Char, baseFilename);
 
-    const examples = getExamples(defsJSON);    
+    const examples = uniqWith(getExamples(defsJSON), isEqual);    
 
 
     return {

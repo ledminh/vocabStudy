@@ -2,17 +2,25 @@ import { useContext } from 'react';
 import { DataContext } from '../controls/DataContext';
 import  styled  from 'styled-components';
 
+import NavBar from './NavBar';
 import WordBlock from './WordBlock';
+import { useState } from 'react';
 
 
 function Main() {
-    const {data} = useContext(DataContext);    
+    const {data} = useContext(DataContext);
+    const [index, setIndex]  = useState(0);  
 
+    
     return (
         data.length != 0 ?
             (<Wrapper>
+                <NavBar numWords={data.length} 
+                        currentIndex={index} 
+                        setIndex={setIndex}
+                        />
                 {
-                    data.map(wData  => <WordBlock key={wData.name} data={wData}/>) 
+                    <WordBlock data={data[index]}/> 
                 }
             </Wrapper>):
             null

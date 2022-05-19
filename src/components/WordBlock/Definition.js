@@ -9,7 +9,7 @@ const Definition = ({data}) => {
             <Type><h5>{type.toUpperCase()}:</h5></Type>
             <Ul>
                 {
-                    defs.map((def) => <Li key={def}>{def}</Li>)
+                    defs.map((def, i) => <Li key={def + type + i}>{def}</Li>)
                 }
             </Ul>
         </>

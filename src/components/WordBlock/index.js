@@ -55,10 +55,9 @@ const sayItButtonHandle = (soundLink, setSayItActive, sayItActive) => {
 }
 
 function WordBlock({data}) {
-    const {name, definitions, synonyms, examples, audioLink} = data;
+    const {name, definitions, synonyms, examples, audioLink, practiceText} = data;
 
     const [sayItActive, setSayItActive] = useState(false);
-
 
     return (
         <Wrapper>
@@ -66,7 +65,7 @@ function WordBlock({data}) {
             <Body>
                 <BlockWrapper title="DEFINITIONS" key="def">
                     {
-                        definitions.map(defData => <Definition key={defData.defs[0]} data={defData} />)
+                        definitions.map(defData => <Definition key={defData.id} data={defData} />)
                     }
                     
                     <SayItButton 
@@ -103,7 +102,10 @@ function WordBlock({data}) {
                 </BlockWrapper>
                 
                 <BlockWrapper title="YOUR TURN" key="yourturn">
-                    <PracticeBlock word={name}/>
+                    <PracticeBlock 
+                        word={name} 
+                        practiceText={practiceText}
+                        />
                 </BlockWrapper>
             </Body>
         

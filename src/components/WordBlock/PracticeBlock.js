@@ -1,17 +1,21 @@
 import styled from "styled-components";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { countInstances } from "../../utils";
 
 
+
+const countWordOccurences = (text, word) => countInstances(text.toUpperCase(), word.toUpperCase());
+
 function useText (word)  {
-    const [text, setText] = useState("");
+    
     const [occurences, setOccurences] = useState(0);
+    const [text, setText] = useState("");
 
     const onChangeHandle = (e) => {
         const value = e.target.value;
         setText(value);
 
-        const count = countInstances(value.toUpperCase(), word.toUpperCase());
+        const count = countWordOccurences(value, word);
         setOccurences(count);
 
         
@@ -19,7 +23,9 @@ function useText (word)  {
 
     return {
         text,
+        setText,
         occurences,
+        setOccurences,
         onChangeHandle
     }
 }
@@ -52,10 +58,26 @@ function highLightWord(text, word) {
 }
 
 
-function PracticeBlock({word}) {
+function PracticeBlock({word, practiceText}) {
     
-    const {text, occurences, onChangeHandle} = useText(word);
+    const {text, setText, occurences, setOccurences, onChangeHandle} = useText(word);
     
+    const wordRef = useRef({practiceText});
+
+    useEffect(() => {
+        wordRef.current.practiceText.text = text;
+
+    }, [text]);
+
+
+    useEffect(() => {
+        wordRef.current = {practiceText};
+
+        setText(wordRef.current.practiceText.text);
+        const count = countWordOccurences(wordRef.current.practiceText.text, word);
+        setOccurences(count);
+        
+    }, [word]);
 
     return ( 
         <Wrapper>

@@ -11,7 +11,16 @@ function useDataContext() {
 
     const addData = (w) => {
         getWordData(w)
-            .then((d) => setData([d, ...data]));
+            .then((d) => {
+
+                const newDObj = {
+                    ...d,
+                    practiceText: {
+                        text: ""
+                    }
+                }
+                setData([newDObj, ...data]);
+            });
     }
 
     const Data = {data, addData};
