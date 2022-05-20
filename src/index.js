@@ -9,7 +9,7 @@ import InputBar from './components/InputBar';
 import Main from './components/Main';
 import ErrorBoundary from './components/ErrorBoundary';
 
-
+import MerriamLogo from './MerriamLogo';
 
 
 
@@ -25,6 +25,7 @@ function App() {
                 <Main />
             </ErrorBoundary>
         </DataProvider>
+        <MerriamLogo />
     </>
     )
 }
