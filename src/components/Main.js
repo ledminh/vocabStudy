@@ -34,7 +34,7 @@ const Wrapper = styled.main`
     border: 4px solid black;
 
     width: 95%;
-    max-width: 1400px;
+    max-width: 1600px;
     min-width: 300px;
     margin: auto;
     margin-top: 2rem;

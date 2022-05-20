@@ -13,9 +13,10 @@ export default MerriamLogo;
 
 const Wrapper = styled.div`
     margin-top: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
     color: gray;
-    
+
     img {
         display: block;
         width: 100px;

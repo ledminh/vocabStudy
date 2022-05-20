@@ -71,7 +71,7 @@ function WordBlock({data}) {
                     <BlockWrapper title="OTHER RESOURCES" key="otherresource">
                         <UL>
                             {
-                                getOtherResources(name).map(wD => <LI key={wD.title}><a href={wD.link}>{wD.title}</a></LI>)
+                                getOtherResources(name).map(wD => <LI key={wD.title}><a href={wD.link} target="_blank" rel="noreferrer">{wD.title}</a></LI>)
                             }
                         </UL>
                     </BlockWrapper>
