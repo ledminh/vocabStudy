@@ -22,11 +22,6 @@ const Wrapper = styled.header`
 
     text-align: center;
 
-  
-    .sub-title {
-        
-
-    }
 `
 
 const Title = styled.div`
