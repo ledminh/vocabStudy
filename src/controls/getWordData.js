@@ -1,5 +1,5 @@
 import { DICTIONARY_KEY, THESAURUS_KEY } from "../APIKEY";
-import {uniqWith, isEqual} from 'lodash';
+import {uniqWith, isEqual, find} from 'lodash';
 
 const getWordRequest = (word) => `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${DICTIONARY_KEY}`;
 
@@ -35,10 +35,14 @@ const processDefinitionsJSON = (defsJSON)  => {
                                 .map(defsObj => ({id:  Math.floor(Math.random() * Date.now()), ...defsObj}));
     
     
-    const baseFilename = defsJSON[0].hwi.prs[0].sound.audio;
+    const audioObj = find(defsJSON, (obj) => obj.hwi.prs);
+
+    const baseFilename = audioObj? audioObj.hwi.prs[0].sound.audio : "";
+    
+    
     const first3Char = baseFilename.substring(0,3);
 
-    const audioLink = getAudio(first3Char, baseFilename);
+    const audioLink = baseFilename == ""? "" : getAudio(first3Char, baseFilename);
 
     const examples = uniqWith(getExamples(defsJSON), isEqual);    
 
@@ -115,6 +119,14 @@ async function getWordData(word) {
     const definitionsJSON = await definitions.json();
 
     
+    if(definitionsJSON.length == 0 || typeof definitionsJSON[0] != 'object'){
+        return {
+            hasError: true,
+            word: word,
+            body: definitionsJSON
+        }
+    }
+
     const {definitionsArr, audioLink, examples} = processDefinitionsJSON(definitionsJSON);
     
     const thesaurus = await fetch(getThesaurusRequest(word));
@@ -124,6 +136,7 @@ async function getWordData(word) {
 
 
     return {
+        hasError: false,
         name: word,
         definitions: definitionsArr,
         examples: examples,

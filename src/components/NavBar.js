@@ -6,13 +6,19 @@ function NavBar({wordsArr, currentIndex, setIndex}) {
         wordsArr.length > 1 ?
         (<Wrapper>
             {
-                wordsArr.map((name, index) => <Button 
-                                                key={name}
-                                                current={index == currentIndex}
-                                                onClick={() => setIndex(index)}
-                                                >
-                                                    {name.toUpperCase()}
-                                                </Button>)
+                wordsArr.map((word, index) => {
+                    if(word.hasError) return ""; 
+
+                    return (
+                        <Button 
+                            key={word.name}
+                            current={index == currentIndex}
+                            onClick={() => setIndex(index)}
+                            >
+                                {word.name.toUpperCase()}
+                        </Button>)
+                    
+                })
             }
         </Wrapper>) :
         null

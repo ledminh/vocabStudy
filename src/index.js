@@ -7,6 +7,7 @@ import useDataContext from './controls/DataContext';
 import Header from './components/Header';
 import InputBar from './components/InputBar';
 import Main from './components/Main';
+import ErrorBoundary from './components/ErrorBoundary';
 
 
 
@@ -18,9 +19,11 @@ function App() {
     return (
     <>
         <Header />
-        <DataProvider> 
-            <InputBar />
-            <Main />
+        <DataProvider>
+            <ErrorBoundary>
+                <InputBar />
+                <Main />
+            </ErrorBoundary>
         </DataProvider>
     </>
     )

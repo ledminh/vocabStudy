@@ -11,11 +11,12 @@ function Main() {
     const {data} = useContext(DataContext);
     const [index, setIndex]  = useState(0);  
 
-    
+
+
     return (
         data.length != 0 ?
             (<Wrapper>
-                <NavBar wordsArr={data.map(d => d.name)} 
+                <NavBar wordsArr={data.map(d => ({name: d.name, hasError: d.hasError}))} 
                         currentIndex={index} 
                         setIndex={setIndex}
                         />

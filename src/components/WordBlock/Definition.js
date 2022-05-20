@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { addAddWordButton } from "../AddWordButton";
+
+
 
 
 const Definition = ({data}) => {
@@ -9,7 +12,7 @@ const Definition = ({data}) => {
             <Type><h5>{type.toUpperCase()}:</h5></Type>
             <Ul>
                 {
-                    defs.map((def, i) => <Li key={def + type + i}>{def}</Li>)
+                    defs.map((def, i) => <Li key={def + type + i}>{addAddWordButton(def, MarkWord)}</Li>)
                 }
             </Ul>
         </>
@@ -35,5 +38,22 @@ const Li = styled.li`
     
     &:before {
         content: "- ";
+    }
+`
+
+const MarkWord = styled.span`
+    font-size: 1.2rem;
+    
+    &:hover {
+        display: inline-block;
+        
+
+        
+        background-color: #5c5c5c;
+        color: #ededed;
+
+        
+
+    
     }
 `

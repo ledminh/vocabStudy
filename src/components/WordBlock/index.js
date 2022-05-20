@@ -5,47 +5,18 @@ import Synonym from './Synonym';
 import Example from './Example';
 import PracticeBlock from './PracticeBlock';
 
+import ErrorDisplay from './ErrorDisplay';
+
 import getOtherResources  from '../../controls/getOtherResources';
 import { createSound } from '../../controls/SoundControl';
 import { useState } from 'react';
 
-// const definitions = [
-//     {
-//         type: "adjective",
-//         defs: ["Adj definition 1", "Adj definition 2", "Adj definition 3"]
-//     },
 
-//     {
-//         type: "noun",
-//         defs: ["Noun definition 1", "Noun definition 2", "Noun definition 3"]
-//     },
-
-//     {
-//         type: "verb",
-//         defs: ["Verb definition 1", "Verb definition 2", "Verb definition 3"]
-//     }
-// ]
-
-// const synonyms = [
-//     'synonyms', 'keep', 'hello'
-// ]
-
-// const examples = [
-//     "The cat stretched.",
-//     "Jacob stood on his tiptoes.",
-//     "The car turned the corner.",
-//     "Kelly twirled in circles.",
-//     "She opened the door.",
-//     "Aaron made a picture.",
-//     "I'm sorry.",
-//     "I danced."
-// ]
-
-const sayItButtonHandle = (soundLink, setSayItActive, sayItActive) => {
-    if(sayItActive) return;
+const sayItButtonHandle = (audioLink, setSayItActive, sayItActive) => {
+    if(sayItActive || audioLink == "") return;
 
 
-    const sound = createSound(soundLink, false, false, .7);
+    const sound = createSound(audioLink, false, false, .7);
     sound.play();
 
     setSayItActive(true);
@@ -61,53 +32,60 @@ function WordBlock({data}) {
 
     return (
         <Wrapper>
-            <Title><h2>{name.toUpperCase()}</h2></Title>
-            <Body>
-                <BlockWrapper title="DEFINITIONS" key="def">
-                    {
-                        definitions.map(defData => <Definition key={defData.id} data={defData} />)
-                    }
-                    
-                    <SayItButton 
-                        active={sayItActive}
-
-                        onClick={() => sayItButtonHandle(audioLink, setSayItActive, sayItActive) 
-                        }>
-                            <h5>SAY IT!</h5>
-                    </SayItButton>
-                </BlockWrapper>
-
-                <BlockWrapper title="SYNONYMS" key="syns">
-                    {
-                        synonyms.length != 0?
-                            synonyms.map(syn => <Synonym key={syn} syn={syn} />):
-                            <NoData>There is no synonym available</NoData>
-                    }                
-                </BlockWrapper>
-                
-                <BlockWrapper title="EXAMPLES" key="exs">
-                    {
-                        examples.length != 0? 
-                            examples.map((ex, index) => <Example key={ex} text={ex} index={index}/>):
-                            <NoData>There is no example available</NoData>
-                    }
-                </BlockWrapper>
-                
-                <BlockWrapper title="OTHER RESOURCES" key="otherresource">
-                    <UL>
+           {
+            data.hasError?
+            <ErrorDisplay error={data} /> :
+           <>
+                <Title><h2>{name.toUpperCase()}</h2></Title>
+                <Body>
+                    <BlockWrapper title="DEFINITIONS" key="def">
                         {
-                            getOtherResources(name).map(wD => <LI key={wD.title}><a href={wD.link}>{wD.title}</a></LI>)
+                            definitions.map(defData => <Definition key={defData.id} data={defData} />)
                         }
-                    </UL>
-                </BlockWrapper>
+                        
+                        <SayItButton 
+                            active={sayItActive}
+                            audioAvailable={audioLink != ""}
+                            onClick={() => sayItButtonHandle(audioLink, setSayItActive, sayItActive) 
+                            }>
+                                <h5>{audioLink == ""? "NO AUDIO" : "SAY IT!"}</h5>
+                        </SayItButton>
+                    </BlockWrapper>
+
+                    <BlockWrapper title="SYNONYMS" key="syns">
+                        {
+                            synonyms.length != 0?
+                                synonyms.map(syn => <Synonym key={syn} syn={syn} />):
+                                <NoData>There is no synonym available</NoData>
+                        }                
+                    </BlockWrapper>
+                    
+                    <BlockWrapper title="EXAMPLES" key="exs">
+                        {
+                            examples.length != 0? 
+                                examples.map((ex, index) => <Example key={ex} text={ex} index={index}/>):
+                                <NoData>There is no example available</NoData>
+                        }
+                    </BlockWrapper>
+                    
+                    <BlockWrapper title="OTHER RESOURCES" key="otherresource">
+                        <UL>
+                            {
+                                getOtherResources(name).map(wD => <LI key={wD.title}><a href={wD.link}>{wD.title}</a></LI>)
+                            }
+                        </UL>
+                    </BlockWrapper>
+                    
+                    <BlockWrapper title="YOUR TURN" key="yourturn">
+                        <PracticeBlock 
+                            word={name} 
+                            practiceText={practiceText}
+                            />
+                    </BlockWrapper>
+                </Body>
+           </>
                 
-                <BlockWrapper title="YOUR TURN" key="yourturn">
-                    <PracticeBlock 
-                        word={name} 
-                        practiceText={practiceText}
-                        />
-                </BlockWrapper>
-            </Body>
+            }
         
         </Wrapper>
     )
@@ -152,7 +130,7 @@ const SayItButton = styled.button`
 
     
 
-    ${props => props.active? `
+    ${props => props.active || !props.audioAvailable? `
         cursor: not-allowed;
         background-color: gray;
         border: none;
@@ -193,6 +171,7 @@ const LI = styled.li`
 
 `
 const NoData = styled.div`
+    margin-bottom: 1rem;
     color: gray;
     text-align: center;
 

@@ -16,9 +16,20 @@ const AddWordButton = ({word}) => {
     
 }
 
+const addAddWordButton = (text, WordWrapper) => text.split(/\b/g).map((w, i) => {
+    const regexTest = /\b(\w+)\b/;
+    
+    if(regexTest.test(w)){
+        return <WordWrapper key={w + i}><AddWordButton word={w} /></WordWrapper>
+    }
+    else {
+        return <span key={w + i}>{w}</span>
+    }
+
+})
 
 export default AddWordButton;
-
+export {addAddWordButton};
 
 const Wrapper = styled.button`
     border: inherit;
@@ -26,3 +37,4 @@ const Wrapper = styled.button`
     color: inherit;
     font-size: inherit;
 `
+
