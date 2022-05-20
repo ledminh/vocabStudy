@@ -211,7 +211,7 @@
     max-width: 100%;
     
     font-size: 1.5rem;
-    font-family: cursive;
+    
     margin-bottom: 1rem;
 `,vt=ze.div`
     font-family: monospace;
