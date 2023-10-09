@@ -4,6 +4,10 @@
 
 This is a web application designed to help you study English vocabulary effectively. It leverages React and the Merriam-Webster dictionary API to provide you with word definitions, synonyms, examples, and other valuable resources to enhance your vocabulary. Additionally, the app allows you to practice pronunciation and writing with the word you're studying.
 
+## Screenshot
+
+![App screenshot](vocabulary-study-screenshot.png)
+
 ## How It Works
 
 1. **Enter a Word**: When you open the app, you'll be greeted with an input field. Enter the word you want to study.
