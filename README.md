@@ -6,7 +6,7 @@ This is a web application designed to help you study English vocabulary effectiv
 
 ## Screenshot
 
-![App screenshot](./vocabulary-study-screenshot.png)
+![App screenshot](./vocabulary-study-screenshot.PNG)
 
 ## How It Works
 
